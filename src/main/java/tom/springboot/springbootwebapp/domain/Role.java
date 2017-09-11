@@ -1,9 +1,6 @@
 package tom.springboot.springbootwebapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +17,33 @@ public class Role extends AbstractDomainClass {
     // ~ defaults to @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "role_id"),
     //     inverseJoinColumns = @joinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable
+    private List<Permission> permissions=new ArrayList<>();
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public void addPermission(Permission permission){
+        if(!this.permissions.contains(permission)){
+            this.permissions.add(permission);
+        }
+
+        if(!permission.getRoles().contains(this)){
+            permission.getRoles().add(this);
+        }
+    }
+
+    public void removePermission(Permission permission){
+        this.permissions.remove(permission);
+        permission.getRoles().remove(this);
+    }
 
     public String getRole() {
         return role;

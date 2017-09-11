@@ -23,6 +23,7 @@ public class User extends AbstractDomainClass  {
     // ~ defaults to @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "user_id"),
     //     inverseJoinColumns = @joinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
+
     private Integer failedLoginAttempts = 0;
 
     public String getUsername() {

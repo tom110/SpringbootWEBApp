@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import tom.springboot.springbootwebapp.domain.Permission;
 import tom.springboot.springbootwebapp.domain.Product;
 import tom.springboot.springbootwebapp.domain.Role;
 import tom.springboot.springbootwebapp.domain.User;
 import tom.springboot.springbootwebapp.repositories.ProductRepository;
+import tom.springboot.springbootwebapp.services.PermissionService;
 import tom.springboot.springbootwebapp.services.RoleService;
 import tom.springboot.springbootwebapp.services.UserService;
 
@@ -21,6 +23,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
     private ProductRepository productRepository;
     private UserService userService;
     private RoleService roleService;
+    private PermissionService permissionService;
 
     private Logger log = Logger.getLogger(SpringJpaBootstrap.class);
 
@@ -39,14 +42,21 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         this.roleService = roleService;
     }
 
+    @Autowired
+    public void setPermissionService(PermissionService permissionService) {
+        this.permissionService = permissionService;
+    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         loadProducts();
         loadUsers();
         loadRoles();
+        loadPermission();
         assignUsersToUserRole();
         assignUsersToAdminRole();
+        assignPermissionsToUserRole();
+        assignPermissionsToAdminRole();
     }
 
     private void loadProducts() {
@@ -92,6 +102,19 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         roleService.saveOrUpdate(adminRole);
         log.info("Saved role" + adminRole.getRole());
     }
+
+    private void loadPermission(){
+        Permission permission=new Permission();
+        permission.setPermission("User");
+        permissionService.saveOrUpdate(permission);
+        log.info("Saved permission"+permission.getPermission());
+        Permission adminPermission=new Permission();
+        adminPermission.setPermission("ADMIN");
+        permissionService.saveOrUpdate(adminPermission);
+        log.info("Saved permission"+adminPermission.getPermission());
+    }
+
+
     private void assignUsersToUserRole() {
         List<Role> roles = (List<Role>) roleService.listAll();
         List<User> users = (List<User>) userService.listAll();
@@ -107,6 +130,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
             }
         });
     }
+
     private void assignUsersToAdminRole() {
         List<Role> roles = (List<Role>) roleService.listAll();
         List<User> users = (List<User>) userService.listAll();
@@ -122,6 +146,37 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
             }
         });
     }
+
+    private void assignPermissionsToUserRole(){
+        List<Role> roles= (List<Role>) roleService.listAll();
+        List<Permission> permissions= (List<Permission>) permissionService.listAll();
+
+        excuAssignPermissionToRole(roles, permissions,"USER");
+    }
+
+    private void assignPermissionsToAdminRole(){
+        List<Role> roles= (List<Role>) roleService.listAll();
+        List<Permission> permissions= (List<Permission>) permissionService.listAll();
+
+        excuAssignPermissionToRole(roles, permissions,"ADMIN");
+    }
+
+    private void excuAssignPermissionToRole(List<Role> roles, List<Permission> permissions,String flag) {
+        permissions.forEach(permission -> {
+            if(permission.getPermission().equalsIgnoreCase(flag)){
+                roles.forEach(role -> {
+                    if(role.getRole().equalsIgnoreCase(flag)){
+                        role.addPermission(permission);
+                        roleService.saveOrUpdate(role);
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
 }
 
 

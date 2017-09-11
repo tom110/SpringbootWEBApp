@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head lang="en">
 
     <title>Spring Framework Guru</title>
@@ -14,7 +14,7 @@
         <div class="form-group">
             <div class="col-sm-10"><h2>Product Details</h2></div>
             <div class="col-sm-2" style="padding-top: 25px;">
-          <span sec:authorize="isAuthenticated()">
+          <span shiro:authenticated="">
               <input type="submit" value="Sign Out"/>
            </span>
             </div>
