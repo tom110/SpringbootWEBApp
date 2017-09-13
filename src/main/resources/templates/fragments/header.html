@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head lang="en">
 
 </head>
@@ -13,7 +14,7 @@
                     <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
                     <ul class="nav navbar-nav">
                         <li><a href="#" th:href="@{/products}">Products</a></li>
-                        <li><a href="#" th:href="@{/product/new}" shiro:hasRole="ADMIN">Create Product</a></li>
+                        <li><a href="#" th:href="@{/product/new}">Create Product</a></li>
                         <li><a href="#" th:href="@{/login}">Sign In</a></li>
                     </ul>
 
@@ -21,7 +22,7 @@
             </div>
         </nav>
         <div class="welcome">
-            <span shiro:authenticated="">Welcome <span shiro:principal=""></span></span>
+            <span shiro:authenticated="true">Welcome <span shiro:principal=""></span></span>
         </div>
         <div class="jumbotron">
             <div class="row text-center">
@@ -32,7 +33,7 @@
                 </div>
             </div>
             <div class="row text-center">
-                <img src="../../static/images/NewBannerBOOTS_2.png" width="400"
+                <img src="/static/images/NewBannerBOOTS_2.png" width="400"
                      th:src="@{/images/NewBannerBOOTS_2.png}"/>
             </div>
         </div>

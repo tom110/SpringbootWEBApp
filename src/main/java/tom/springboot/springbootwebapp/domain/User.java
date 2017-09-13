@@ -12,10 +12,9 @@ public class User extends AbstractDomainClass  {
 
     private String username;
 
-    @Transient
+//    @Transient
     private String password;
 
-    private String encryptedPassword;
     private Boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -40,14 +39,6 @@ public class User extends AbstractDomainClass  {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
     }
 
     public Boolean getEnabled() {

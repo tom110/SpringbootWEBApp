@@ -22,6 +22,7 @@ public class ProductController {
     private ProductService productService;
     private Logger log = Logger.getLogger(ProductController.class);
 
+
     @Autowired
     public void setProductService(ProductService productService) {
         this.productService = productService;
@@ -70,17 +71,17 @@ public class ProductController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request) throws Exception{
         log.info("login()");
-        String user=request.getParameter("username");
+        String username=request.getParameter("username");
         String password=request.getParameter("password");
         Subject subject= SecurityUtils.getSubject();
-        UsernamePasswordToken token=new UsernamePasswordToken(user,password);
+        UsernamePasswordToken token=new UsernamePasswordToken(username,password);
         try{
             subject.login(token);
             Session session=subject.getSession();
             return "/index";
         }catch(Exception e){
             e.printStackTrace();
-            return "/index";
+            return "/403";
         }
     }
 

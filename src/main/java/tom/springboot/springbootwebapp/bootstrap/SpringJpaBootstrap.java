@@ -94,22 +94,22 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
 
     private void loadRoles() {
         Role role = new Role();
-        role.setRole("USER");
+        role.setRole("user");
         roleService.saveOrUpdate(role);
         log.info("Saved role" + role.getRole());
         Role adminRole = new Role();
-        adminRole.setRole("ADMIN");
+        adminRole.setRole("admin");
         roleService.saveOrUpdate(adminRole);
         log.info("Saved role" + adminRole.getRole());
     }
 
     private void loadPermission(){
         Permission permission=new Permission();
-        permission.setPermission("User");
+        permission.setPermission("user");
         permissionService.saveOrUpdate(permission);
         log.info("Saved permission"+permission.getPermission());
         Permission adminPermission=new Permission();
-        adminPermission.setPermission("ADMIN");
+        adminPermission.setPermission("admin");
         permissionService.saveOrUpdate(adminPermission);
         log.info("Saved permission"+adminPermission.getPermission());
     }
@@ -120,7 +120,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         List<User> users = (List<User>) userService.listAll();
 
         roles.forEach(role -> {
-            if (role.getRole().equalsIgnoreCase("USER")) {
+            if (role.getRole().equalsIgnoreCase("user")) {
                 users.forEach(user -> {
                     if (user.getUsername().equals("user")) {
                         user.addRole(role);
@@ -136,7 +136,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         List<User> users = (List<User>) userService.listAll();
 
         roles.forEach(role -> {
-            if (role.getRole().equalsIgnoreCase("ADMIN")) {
+            if (role.getRole().equalsIgnoreCase("admin")) {
                 users.forEach(user -> {
                     if (user.getUsername().equals("admin")) {
                         user.addRole(role);
@@ -151,14 +151,14 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         List<Role> roles= (List<Role>) roleService.listAll();
         List<Permission> permissions= (List<Permission>) permissionService.listAll();
 
-        excuAssignPermissionToRole(roles, permissions,"USER");
+        excuAssignPermissionToRole(roles, permissions,"user");
     }
 
     private void assignPermissionsToAdminRole(){
         List<Role> roles= (List<Role>) roleService.listAll();
         List<Permission> permissions= (List<Permission>) permissionService.listAll();
 
-        excuAssignPermissionToRole(roles, permissions,"ADMIN");
+        excuAssignPermissionToRole(roles, permissions,"admin");
     }
 
     private void excuAssignPermissionToRole(List<Role> roles, List<Permission> permissions,String flag) {

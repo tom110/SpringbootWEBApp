@@ -34,9 +34,9 @@
                 <td th:text="${product.productId}">Product Id</td>
                 <td th:text="${product.description}">descirption</td>
                 <td th:text="${product.price}">price</td>
-                <td shiro:hasRole="USER"><a th:href="${'/product/show/' + product.id}">View</a></td>
-                <td shiro:authenticated="ADMIN"><a th:href="${'/product/edit/' + product.id}">Edit</a></td>
-                <td shiro:authenticated="ADMIN"><a th:href="${'/product/delete/' + product.id}">Delete</a></td>
+                <td shiro:hasRole="user"><a th:href="${'/product/show/' + product.id}">View</a></td>
+                <td shiro:hasRole="user"><a th:href="${'/product/edit/' + product.id}">Edit</a></td>
+                <td shiro:hasRole="admin"><a th:href="${'/product/delete/' + product.id}">Delete</a></td>
             </tr>
         </table>
 

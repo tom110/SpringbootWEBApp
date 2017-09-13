@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tom.springboot.springbootwebapp.domain.User;
 import tom.springboot.springbootwebapp.repositories.UserRepository;
-import tom.springboot.springbootwebapp.services.security.EncryptionService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +21,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    private EncryptionService encryptionService;
-
-    @Autowired
-    public void setEncryptionService(EncryptionService encryptionService) {
-        this.encryptionService = encryptionService;
-    }
-
-
     @Override
     public List<?> listAll() {
         List<User> users = new ArrayList<>();
@@ -44,9 +35,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveOrUpdate(User domainObject) {
-        if (domainObject.getPassword() != null) {
-            domainObject.setEncryptedPassword(encryptionService.encryptString(domainObject.getPassword()));
-        }
         return userRepository.save(domainObject);
     }
 
