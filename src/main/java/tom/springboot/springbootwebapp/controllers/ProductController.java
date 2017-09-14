@@ -1,6 +1,7 @@
 package tom.springboot.springbootwebapp.controllers;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ProductController {
 
     private ProductService productService;
-    private Logger log = Logger.getLogger(ProductController.class);
+    private Logger log = LogManager.getLogger(ProductController.class);
 
 
     @Autowired

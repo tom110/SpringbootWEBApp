@@ -1,6 +1,7 @@
 package tom.springboot.springbootwebapp;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import tom.springboot.springbootwebapp.services.UserService;
 public class SpringBootWebApplicationTests {
 
     private UserService userService;
-    private Logger log = Logger.getLogger(SpringBootWebApplicationTests.class);
+    private Logger log = LogManager.getLogger(SpringBootWebApplicationTests.class);
 
     @Autowired
     public void setUserService(UserService userService) {

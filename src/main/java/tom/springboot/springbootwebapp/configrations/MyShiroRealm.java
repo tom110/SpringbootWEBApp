@@ -1,6 +1,7 @@
 package tom.springboot.springbootwebapp.configrations;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,7 +20,7 @@ import tom.springboot.springbootwebapp.services.UserService;
 public class MyShiroRealm extends AuthorizingRealm {
     private UserService userService;
     private RoleService roleService;
-    private Logger log = Logger.getLogger(MyShiroRealm.class);
+    private Logger log = LogManager.getLogger(MyShiroRealm.class);
 
     @Autowired
     public void setUserService(UserService userService) {
