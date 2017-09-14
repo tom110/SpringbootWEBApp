@@ -102,6 +102,7 @@ public class SpringJpaBootstrap implements ApplicationListener<ContextRefreshedE
         adminRole.setRole("admin");
         roleService.saveOrUpdate(adminRole);
         log.info("Saved role" + adminRole.getRole());
+        Role metricsRole = new Role();
     }
 
     private void loadPermission(){
