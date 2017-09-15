@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Framework Guru</title>
+
+    <!--/*/ <th:block th:include="monitor/fragments/monitor-headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" class=".col-md-6"></div>
+</div>
+<script th:src="@{/js/monitor-js.js}"></script>
+</body>
+</html>

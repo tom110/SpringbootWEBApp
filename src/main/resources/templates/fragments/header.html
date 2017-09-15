@@ -13,8 +13,8 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
                     <ul class="nav navbar-nav">
-                        <li><a href="#" th:href="@{/products}">Products</a></li>
-                        <li><a href="#" th:href="@{/product/new}">Create Product</a></li>
+                        <li><a href="#" shiro:hasRole="admin" th:href="@{/products}">Products</a></li>
+                        <li><a href="#" shiro:hasRole="admin" th:href="@{/product/new}">Create Product</a></li>
                         <li><a href="#" th:href="@{/login}">Sign In</a></li>
                     </ul>
 
@@ -27,14 +27,13 @@
         <div class="jumbotron">
             <div class="row text-center">
                 <div class="">
-                    <h2>Spring Framework Guru</h2>
+                    <h2>Spring Framework TOM</h2>
 
                     <h3>Spring Boot Web App</h3>
                 </div>
             </div>
             <div class="row text-center">
-                <img src="/static/images/NewBannerBOOTS_2.png" width="400"
-                     th:src="@{/images/NewBannerBOOTS_2.png}"/>
+                <img width="400" th:src="@{/images/timg.jpg}"/>
             </div>
         </div>
     </div>

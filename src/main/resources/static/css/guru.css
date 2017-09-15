@@ -6,3 +6,6 @@ input[type=submit] {
     text-decoration: underline;
     cursor:pointer;
 }
+td{
+    text-align: center;
+}
